@@ -1,5 +1,6 @@
 package com.borisovskaya.reservation.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ public class ReservationController {
 
     //@Autowired
     //private ReservationService reservationService;
+    @Value ("${hellovar}")
+    private String message;
 
     @GetMapping(value = "/reservation", produces = "application/json")
     public ResponseEntity temp() {
-        return ResponseEntity.status(HttpStatus.OK).body("Hi from reservation service");
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 }
