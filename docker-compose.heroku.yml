@@ -1,0 +1,8 @@
+version: "3"
+services:
+  gateway:
+    build:
+ #     context: .   # is it necessary?
+      dockerfile: gateway/Dockerfile
+    ports:
+      - 8080:8080
