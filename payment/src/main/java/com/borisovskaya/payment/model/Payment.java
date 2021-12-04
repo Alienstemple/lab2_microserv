@@ -11,7 +11,7 @@ public class Payment {
     private Integer id;
 
     @Column(name = "payment_uid")
-    private String payment_uid = UUID.randomUUID().toString();
+    private String paymentUid = UUID.randomUUID().toString();
 
     @Column(name = "status", nullable = false, length = 20)
     private String status;
@@ -20,11 +20,11 @@ public class Payment {
     private Integer price;
 
     public String getPayment_uid() {
-        return payment_uid;
+        return paymentUid;
     }
 
     public void setPayment_uid(String payment_uid) {
-        this.payment_uid = payment_uid;
+        this.paymentUid = payment_uid;
     }
 
     public String getStatus() {
@@ -50,14 +50,13 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", payment_uid='" + payment_uid + '\'' +
+                ", payment_uid='" + paymentUid + '\'' +
                 ", status='" + status + '\'' +
                 ", price=" + price +
                 '}';
     }
 
-    public Payment(String payment_uid, String status, Integer price) {
-        this.payment_uid = payment_uid;
+    public Payment(String status, Integer price) {
         this.status = status;
         this.price = price;
     }

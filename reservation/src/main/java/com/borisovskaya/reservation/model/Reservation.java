@@ -29,7 +29,7 @@ public class Reservation {
     private String start_date;      // TODO:TIMESTAMP WITH TIME ZONE,
 
     @Column(name = "end_date", nullable = false)
-    private String end_date;
+    private String end_data;
 
     @Override
     public String toString() {
