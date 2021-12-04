@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # TODO build, test and deploy project
+      # TODO build, test and deploy project, next
       - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
         id: heroku
         uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0  # use the latest version of the action
