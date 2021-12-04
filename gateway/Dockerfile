@@ -6,8 +6,8 @@
 ##RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM maven:3.6.3-jdk-11-slim AS build
-COPY gateway/src /home/app/gateway/src
-COPY gateway/pom.xml /home/app/gateway
+COPY src /home/app/gateway/src
+COPY pom.xml /home/app/gateway
 RUN mvn -f /home/app/gateway/pom.xml clean package
 
 # Package stage

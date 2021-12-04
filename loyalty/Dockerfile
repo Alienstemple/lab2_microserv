@@ -6,8 +6,8 @@
 ##RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM maven:3.6.3-jdk-11-slim AS build
-COPY loyalty/src /home/app/loyalty/src
-COPY loyalty/pom.xml /home/app/loyalty
+COPY src /home/app/loyalty/src
+COPY pom.xml /home/app/loyalty
 RUN mvn -f /home/app/loyalty/pom.xml clean package
 
 # Package stage
