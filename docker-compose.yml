@@ -24,3 +24,9 @@ services:
       dockerfile: gateway/Dockerfile
     ports:
       - 8080:8080
+  loyalty:
+    build:
+      context: .
+      dockerfile: loyalty/Dockerfile
+    ports:
+      - 8081:8081

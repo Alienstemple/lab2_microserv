@@ -16,6 +16,14 @@ jobs:
           fetch-depth: 0
 
       # TODO build, test and deploy project
+      - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
+        id: heroku
+        uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0  # use the latest version of the action
+        with:
+          email: borisovsk_a@mail.ru
+          api_key: 1d2d9518-5fe3-4db2-a191-88313365f768
+          docker_compose_file: './docker-compose.heroku.yml' # set the path to the folder where the docker-compose file is located
+          heroku_apps: '[{"imagename":"gateway","appname":"lab2-microserv","apptype":"web"},{"imagename":"loyalty","appname":"loyalty-service-lab2","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
 
       - name: Run API Tests
         id: run-newman
