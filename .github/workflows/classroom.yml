@@ -34,7 +34,7 @@ jobs:
           appdir: "gateway"
           usedocker: true
 
-      - name: Run API Tests
+      - name: Run API Tests 1   # Часть 1
         id: run-newman
         uses: anthonyvscode/newman-action@v1
         with:
@@ -42,6 +42,16 @@ jobs:
           environment: v2/postman/[rsoi][heroku] postman_environment.json
           delayRequest: 100
           reporters: cli
+
+#      - name: Run API Tests 2
+#        uses: matt-ball/newman-action@master
+#        with:
+#          collection: v2/postman/[rsoi] postman_collection.json
+#          environment: v2/postman/[rsoi][heroku] postman_environment.json
+#          delayRequest: 100
+#          reporters: '[ "cli" ]'
+#          envVar: '[{ "key":"serviceName", "value":"loyalty-service-lab2" }, { "key":"herokuApiToken", "value":"${{secrets.HEROKU_API_KEY}}" }]'
+
 
       - uses: education/autograding@v1
         id: autograder
