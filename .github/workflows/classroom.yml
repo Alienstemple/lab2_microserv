@@ -34,7 +34,8 @@ jobs:
           appdir: "gateway"
           usedocker: true
 
-      - name: Run API Tests 1   # Часть 1
+      # Часть 1
+      - name: Run API Tests 1
         id: run-newman
         uses: anthonyvscode/newman-action@v1
         with:
