@@ -43,6 +43,7 @@ jobs:
           delayRequest: 100
           reporters: cli
 
+      # Часть 2
 #      - name: Run API Tests 2
 #        uses: matt-ball/newman-action@master
 #        with:
@@ -52,6 +53,18 @@ jobs:
 #          reporters: '[ "cli" ]'
 #          envVar: '[{ "key":"serviceName", "value":"loyalty-service-lab2" }, { "key":"herokuApiToken", "value":"${{secrets.HEROKU_API_KEY}}" }]'
 
+      # Часть 3
+      # TODO build, publish to docker hub, deploy to k8s
+
+#      - name: Run API Tests 3
+#        id: run-newman
+#        uses: anthonyvscode/newman-action@v1
+#        with:
+#          # TODO insert your variant
+#          collection: v2/postman/[rsoi] postman_collection.json
+#          environment: v2/postman/[rsoi][heroku] postman_environment.json
+#          delayRequest: 100
+#          reporters: cli
 
       - uses: education/autograding@v1
         id: autograder
