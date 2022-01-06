@@ -1,6 +1,7 @@
 package com.borisovskaya.reservation.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "reservation")
@@ -10,13 +11,13 @@ public class Reservation {
     private Integer id;
 
     @Column(name = "reservation_uid", nullable = false)
-    private String reservation_uid;
+    private UUID reservationUid;
 
     @Column(name = "username", nullable = false, length = 80)
     private String username;
 
     @Column(name = "payment_uid", nullable = false)
-    private String payment_uid;
+    private String paymentUid;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
@@ -26,33 +27,33 @@ public class Reservation {
     private String status;
 
     @Column(name = "start_date", nullable = false)
-    private String start_date;      // TODO:TIMESTAMP WITH TIME ZONE,
+    private String startDate;      // TODO:TIMESTAMP WITH TIME ZONE,
 
-    @Column(name = "end_date", nullable = false)
-    private String end_data;
+    @Column(name = "end_data", nullable = false)
+    private String endDate;
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", reservation_uid='" + reservation_uid + '\'' +
+                ", reservation_uid='" + reservationUid + '\'' +
                 ", username='" + username + '\'' +
-                ", payment_uid='" + payment_uid + '\'' +
+                ", paymentUid='" + paymentUid + '\'' +
                 ", hotel=" + hotel +
                 ", status='" + status + '\'' +
-                ", start_date='" + start_date + '\'' +
-                ", end_date='" + end_date + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 '}';
     }
 
-    public Reservation(String reservation_uid, String username, String payment_uid, Hotels hotel, String status, String start_date, String end_date) {
-        this.reservation_uid = reservation_uid;
+    public Reservation(UUID reservationUid, String username, String paymentUid, Hotels hotel, String status, String startDate, String endDate) {
+        this.reservationUid = reservationUid;
         this.username = username;
-        this.payment_uid = payment_uid;
+        this.paymentUid = paymentUid;
         this.hotel = hotel;
         this.status = status;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Reservation() {

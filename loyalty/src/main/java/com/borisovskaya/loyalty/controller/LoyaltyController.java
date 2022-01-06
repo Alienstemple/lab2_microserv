@@ -18,6 +18,11 @@ public class LoyaltyController {
     @Autowired
     private LoyaltyService loyaltyService;
 
+    @GetMapping(value = "/loyalty/ping", produces = "application/json")
+    public String pingLoyalty() {
+        return "Hi from loyalty!";
+    }
+
     @GetMapping(value = "/loyalty", produces = "application/json")
     public ResponseEntity<LoyaltyResponse> getLoyaltyByUsername(@RequestParam String username) {
         return new ResponseEntity<LoyaltyResponse>(loyaltyService.getLoyalty(username), HttpStatus.OK);

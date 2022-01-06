@@ -1,5 +1,6 @@
 package com.borisovskaya.loyalty;
 
+import com.borisovskaya.loyalty.controller.LoyaltyController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

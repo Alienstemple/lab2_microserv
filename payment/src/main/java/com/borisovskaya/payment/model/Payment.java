@@ -1,5 +1,7 @@
 package com.borisovskaya.payment.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -11,7 +13,9 @@ public class Payment {
     private Integer id;
 
     @Column(name = "payment_uid")
-    private String paymentUid = UUID.randomUUID().toString();
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String paymentUid;
 
     @Column(name = "status", nullable = false, length = 20)
     private String status;
@@ -19,12 +23,8 @@ public class Payment {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    public String getPayment_uid() {
+    public String getPaymentUid() {
         return paymentUid;
-    }
-
-    public void setPayment_uid(String payment_uid) {
-        this.paymentUid = payment_uid;
     }
 
     public String getStatus() {

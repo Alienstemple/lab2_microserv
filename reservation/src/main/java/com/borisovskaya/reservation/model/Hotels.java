@@ -1,6 +1,10 @@
 package com.borisovskaya.reservation.model;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "hotels")
@@ -10,7 +14,10 @@ public class Hotels {
     private Integer id;
 
     @Column(name = "hotel_uid", nullable = false)
-    private String hotel_uid;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "guid")
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID hotelUid;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -30,12 +37,8 @@ public class Hotels {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    public String getHotel_uid() {
-        return hotel_uid;
-    }
-
-    public void setHotel_uid(String hotel_uid) {
-        this.hotel_uid = hotel_uid;
+    public UUID getHotelUid() {
+        return hotelUid;
     }
 
     public String getName() {
@@ -90,7 +93,7 @@ public class Hotels {
     public String toString() {
         return "Hotels{" +
                 "id=" + id +
-                ", hotel_uid='" + hotel_uid + '\'' +
+                ", hotelUid='" + hotelUid + '\'' +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
@@ -100,8 +103,7 @@ public class Hotels {
                 '}';
     }
 
-    public Hotels(String hotel_uid, String name, String country, String city, String address, Integer stars, Integer price) {
-        this.hotel_uid = hotel_uid;
+    public Hotels(String name, String country, String city, String address, Integer stars, Integer price) {
         this.name = name;
         this.country = country;
         this.city = city;

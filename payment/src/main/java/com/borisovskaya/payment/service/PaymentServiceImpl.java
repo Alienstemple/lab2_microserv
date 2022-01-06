@@ -4,6 +4,8 @@ import com.borisovskaya.payment.model.Payment;
 import com.borisovskaya.payment.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
@@ -18,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment cancelPayment(String paymentUid) {
+    public Payment cancelPayment(UUID paymentUid) {
         Payment payment = paymentRepository.findByPaymentUid(paymentUid);
         payment.setStatus("CANCELED");
         return paymentRepository.save(payment);
