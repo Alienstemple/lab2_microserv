@@ -1,0 +1,72 @@
+name: GitHub Classroom Workflow
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # TODO build, test and deploy project, next
+      - name: Deploy Docker Image to Heroku App
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 1d2d9518-5fe3-4db2-a191-88313365f768
+          heroku_app_name: loyalty-service-lab2
+          heroku_email: borisovsk_a@mail.ru
+          appdir: "loyalty"
+          usedocker: true
+
+      - name: Deploy Docker Image to Heroku App
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 1d2d9518-5fe3-4db2-a191-88313365f768
+          heroku_app_name: lab2-microserv
+          heroku_email: borisovsk_a@mail.ru
+          appdir: "gateway"
+          usedocker: true
+
+      # Часть 1
+      - name: Run API Tests 1
+        id: run-newman
+        uses: anthonyvscode/newman-action@v1
+        with:
+          collection: v2/postman/[rsoi] postman_collection.json
+          environment: v2/postman/[rsoi][heroku] postman_environment.json
+          delayRequest: 100
+          reporters: cli
+
+      # Часть 2
+#      - name: Run API Tests 2
+#        uses: matt-ball/newman-action@master
+#        with:
+#          collection: v2/postman/[rsoi] postman_collection.json
+#          environment: v2/postman/[rsoi][heroku] postman_environment.json
+#          delayRequest: 100
+#          reporters: '[ "cli" ]'
+#          envVar: '[{ "key":"serviceName", "value":"loyalty-service-lab2" }, { "key":"herokuApiToken", "value":"${{secrets.HEROKU_API_KEY}}" }]'
+
+      # Часть 3
+      # TODO build, publish to docker hub, deploy to k8s
+
+#      - name: Run API Tests 3
+#        id: run-newman
+#        uses: anthonyvscode/newman-action@v1
+#        with:
+#          # TODO insert your variant
+#          collection: v2/postman/[rsoi] postman_collection.json
+#          environment: v2/postman/[rsoi][heroku] postman_environment.json
+#          delayRequest: 100
+#          reporters: cli
+
+      - uses: education/autograding@v1
+        id: autograder
+        continue-on-error: true
