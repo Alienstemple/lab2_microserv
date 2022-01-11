@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @RestController
-@RequestMapping("/")   //api/v1
+@RequestMapping("/api/v1")
 public class GatewayController {
     private final RestTemplate restTemplate;
 
@@ -42,7 +42,7 @@ public class GatewayController {
 
     @GetMapping(value = "/loyalty", produces = "application/json")
     public String getLoyaltyByUsername(@RequestParam String username) {
-        String loyaltyUri = "http://localhost:8081/api/v1/loyalty?username={un}";
+        String loyaltyUri = "https://loyalty-service-lab2.herokuapp.com/api/v1/loyalty?username={un}";
         String resp = restTemplate.getForObject(loyaltyUri, String.class, username);
         return resp;
     }
