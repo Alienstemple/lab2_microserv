@@ -34,6 +34,23 @@ jobs:
           appdir: "gateway"
           usedocker: true
 
+      - name: Deploy Docker Image to Heroku App
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
+          heroku_app_name: payment-service-lab2
+          heroku_email: borisovsk_a@mail.ru
+          appdir: "payment"
+          usedocker: true
+      - name: Deploy Docker Image to Heroku App
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
+          heroku_app_name: reservation-service-lab2
+          heroku_email: borisovsk_a@mail.ru
+          appdir: "reservation"
+          usedocker: true
+
       # Часть 1
       - name: Run API Tests 1
         id: run-newman
