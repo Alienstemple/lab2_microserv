@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/")   //api/v1
 public class GatewayController {
     private final RestTemplate restTemplate;
 
@@ -35,7 +35,7 @@ public class GatewayController {
     @Value("${loyalty.uri}")
     private String loyaltyUri;
 
-    @GetMapping(value = "/gateway", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public ResponseEntity temp() {
         return ResponseEntity.status(HttpStatus.OK).body("Hi from gateway!");
     }
