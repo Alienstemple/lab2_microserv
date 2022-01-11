@@ -19,7 +19,7 @@ jobs:
       - name: Deploy Docker Image to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: 1d2d9518-5fe3-4db2-a191-88313365f768
+          heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
           heroku_app_name: loyalty-service-lab2
           heroku_email: borisovsk_a@mail.ru
           appdir: "loyalty"
@@ -28,7 +28,7 @@ jobs:
       - name: Deploy Docker Image to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: 1d2d9518-5fe3-4db2-a191-88313365f768
+          heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
           heroku_app_name: lab2-microserv
           heroku_email: borisovsk_a@mail.ru
           appdir: "gateway"
