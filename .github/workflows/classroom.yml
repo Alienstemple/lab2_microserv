@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       # TODO build, test and deploy project, next
-      - name: Deploy Docker Image to Heroku App
+      - name: Deploy Loyalty service to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
@@ -25,7 +25,7 @@ jobs:
           appdir: "loyalty"
           usedocker: true
 
-      - name: Deploy Docker Image to Heroku App
+      - name: Deploy Gateway service to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
@@ -34,7 +34,7 @@ jobs:
           appdir: "gateway"
           usedocker: true
 
-      - name: Deploy Docker Image to Heroku App
+      - name: Deploy Payment service to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
@@ -42,7 +42,7 @@ jobs:
           heroku_email: borisovsk_a@mail.ru
           appdir: "payment"
           usedocker: true
-      - name: Deploy Docker Image to Heroku App
+      - name: Deploy Reservation service to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: 2a513e59-8af6-45ea-8f0a-cf2ebfbc9527
