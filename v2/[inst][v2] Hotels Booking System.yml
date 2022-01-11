@@ -3,11 +3,7 @@ info:
   title: Hotels Booking System
   version: "1.0"
 servers:
-<<<<<<< HEAD
   - url: #http://localhost:8080
-=======
-  - url: http://localhost:8080
->>>>>>> ddcde107c68dd551d36121599899673804d9365a
 paths:
   /api/v1/hotels:
     get:
