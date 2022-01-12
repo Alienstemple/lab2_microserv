@@ -40,17 +40,21 @@ public class GatewayController {
         return ResponseEntity.status(HttpStatus.OK).body("Hi from gateway!");
     }
 
-    @GetMapping(value = "/loyalty", produces = "application/json")
-    public String getLoyaltyByUsername(@RequestParam String username) {
-        String loyaltyUri = "https://loyalty-service-lab2.herokuapp.com/api/v1/loyalty?username={un}";
-        String resp = restTemplate.getForObject(loyaltyUri, String.class, username);
+
+
+
+
+    @GetMapping(value = "/hotels", produces = "application/json")
+    public ResponseEntity<Object> getHotelsList(@RequestParam Integer page, @RequestParam Integer size) {
+        String reservationUri = "https://reservation-service-lab2.herokuapp.com/api/v1/loyalty?page={page}&size={size}";
+        ResponseEntity<Object> resp = restTemplate.getForObject(reservationUri, ResponseEntity.class, page, size);
         return resp;
     }
 
     @PostMapping(value = "/reservations", consumes = "application/json", produces = "application/json")
-    public ResponseEntity reservHotel(@RequestHeader("X-User-Name") String xUserName,
-                                      @RequestHeader("Content-Type") String contentType,
-                                      @RequestBody ReservationRequest reservationRequest) {
+    public ResponseEntity<Object> postNewReservation(@RequestHeader("X-User-Name") String xUserName,
+                                                     @RequestHeader("Content-Type") String contentType,
+                                                     @RequestBody ReservationRequest reservationRequest) {
 
         // Check if hotel exists
         HotelsResponse hotel;
@@ -66,5 +70,30 @@ public class GatewayController {
         LoyaltyResponse incrLoyalty = restTemplate.getForObject(loyaltyIncrUri, LoyaltyResponse.class, xUserName);
 
         return ResponseEntity.status(HttpStatus.OK).body(reservationRequest + "\nprice = " + price + "\ndiscount = " + loyalty.getDiscount() + incrLoyalty);
+    }
+
+    @GetMapping(value = "/reservations", produces = "application/json")
+    public ResponseEntity<Object> getReservationInfo(@RequestParam String reservationUid,
+                                                      @RequestHeader("X-User-Name") String xUserName,
+                                                      @RequestHeader("Content-Type") String contentType) {
+        return ResponseEntity.status(HttpStatus.OK).body(xUserName);
+    }
+
+    @GetMapping(value = "/me", produces = "application/json")
+    public ResponseEntity<Object> getUserReservations(@RequestHeader("X-User-Name") String xUserName,
+                                                      @RequestHeader("Content-Type") String contentType) {
+        return ResponseEntity.status(HttpStatus.OK).body(xUserName);
+    }
+
+    @GetMapping(value = "/loyalty", produces = "application/json")
+    public ResponseEntity<Object> getLoyaltyByUsername(@RequestParam String username) {
+        String loyaltyUri = "https://loyalty-service-lab2.herokuapp.com/api/v1/loyalty?username={un}";
+        String resp = restTemplate.getForObject(loyaltyUri, String.class, username);
+        return ResponseEntity.status(HttpStatus.OK).body(resp);
+    }
+
+    @DeleteMapping(value = "/reservations", produces = "text/plain")
+    public ResponseEntity<Object> deleteReservation(@RequestParam String reservationUid) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
     }
 }
