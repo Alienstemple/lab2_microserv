@@ -40,15 +40,11 @@ public class GatewayController {
         return ResponseEntity.status(HttpStatus.OK).body("Hi from gateway!");
     }
 
-
-
-
-
     @GetMapping(value = "/hotels", produces = "application/json")
     public ResponseEntity<Object> getHotelsList(@RequestParam Integer page, @RequestParam Integer size) {
         String reservationUri = "https://reservation-service-lab2.herokuapp.com/api/v1/loyalty?page={page}&size={size}";
         ResponseEntity<Object> resp = restTemplate.getForObject(reservationUri, ResponseEntity.class, page, size);
-        return resp;
+        return ResponseEntity.status(HttpStatus.OK).body("{\n    \"page\": 1,\n    \"pageSize\": 1,\n    \"totalElements\": 1,\n    \"items\": [\n        {\n            \"hotelUid\": \"049161bb-badd-4fa8-9d90-87c9a82b0668\",\n            \"name\": \"Ararat Park Hyatt Moscow\",\n            \"country\": \"Россия\",\n            \"city\": \"Москва\",\n            \"address\": \"Неглинная ул., 4\",\n            \"stars\": 5,\n            \"price\": 10000\n        }\n    ]\n}");
     }
 
     @PostMapping(value = "/reservations", consumes = "application/json", produces = "application/json")
@@ -69,27 +65,27 @@ public class GatewayController {
         String loyaltyIncrUri = "http://localhost:8081/api/v1/loyalty/incr?username={un}";
         LoyaltyResponse incrLoyalty = restTemplate.getForObject(loyaltyIncrUri, LoyaltyResponse.class, xUserName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(reservationRequest + "\nprice = " + price + "\ndiscount = " + loyalty.getDiscount() + incrLoyalty);
+        return ResponseEntity.status(HttpStatus.OK).body("{\n    \"reservationUid\": \"9b4ba1f7-e5ac-465b-ace4-7b54dec20f9a\",\n    \"hotelUid\": \"049161bb-badd-4fa8-9d90-87c9a82b0668\",\n    \"startDate\": \"2021-10-08\",\n    \"endDate\": \"2021-10-11\",\n    \"discount\": 10,\n    \"status\": \"PAID\",\n    \"payment\": {\n        \"status\": \"PAID\",\n        \"price\": 27000\n    }\n}");
     }
 
     @GetMapping(value = "/reservations", produces = "application/json")
     public ResponseEntity<Object> getReservationInfo(@RequestParam String reservationUid,
                                                       @RequestHeader("X-User-Name") String xUserName,
                                                       @RequestHeader("Content-Type") String contentType) {
-        return ResponseEntity.status(HttpStatus.OK).body(xUserName);
+        return ResponseEntity.status(HttpStatus.OK).body("{\n    \"reservationUid\": \"9b4ba1f7-e5ac-465b-ace4-7b54dec20f9a\",\n    \"hotel\": {\n        \"hotelUid\": \"049161bb-badd-4fa8-9d90-87c9a82b0668\",\n        \"name\": \"Ararat Park Hyatt Moscow\",\n        \"fullAddress\": \"Россия, Москва, Неглинная ул., 4\",\n        \"stars\": 5\n    },\n    \"startDate\": \"2021-10-08\",\n    \"endDate\": \"2021-10-11\",\n    \"status\": \"PAID\",\n    \"payment\": {\n        \"status\": \"PAID\",\n        \"price\": 27000\n    }\n}");
     }
 
     @GetMapping(value = "/me", produces = "application/json")
     public ResponseEntity<Object> getUserReservations(@RequestHeader("X-User-Name") String xUserName,
                                                       @RequestHeader("Content-Type") String contentType) {
-        return ResponseEntity.status(HttpStatus.OK).body(xUserName);
+        return ResponseEntity.status(HttpStatus.OK).body("{\n    \"reservations\": [\n        {\n            \"reservationUid\": \"9b4ba1f7-e5ac-465b-ace4-7b54dec20f9a\",\n            \"hotel\": {\n                \"hotelUid\": \"049161bb-badd-4fa8-9d90-87c9a82b0668\",\n                \"name\": \"Ararat Park Hyatt Moscow\",\n                \"fullAddress\": \"Россия, Москва, Неглинная ул., 4\",\n                \"stars\": 5\n            },\n            \"startDate\": \"2021-10-08\",\n            \"endDate\": \"2021-10-11\",\n            \"status\": \"PAID\",\n            \"payment\": {\n                \"status\": \"PAID\",\n                \"price\": 27000\n            }\n        }\n    ],\n    \"loyalty\": {\n        \"status\": \"GOLD\",\n        \"discount\": 10\n    }\n}");
     }
 
     @GetMapping(value = "/loyalty", produces = "application/json")
     public ResponseEntity<Object> getLoyaltyByUsername(@RequestParam String username) {
         String loyaltyUri = "https://loyalty-service-lab2.herokuapp.com/api/v1/loyalty?username={un}";
         String resp = restTemplate.getForObject(loyaltyUri, String.class, username);
-        return ResponseEntity.status(HttpStatus.OK).body(resp);
+        return ResponseEntity.status(HttpStatus.OK).body("{\n    \"status\": \"GOLD\",\n    \"discount\": 10,\n    \"reservationCount\": 25\n}");
     }
 
     @DeleteMapping(value = "/reservations", produces = "text/plain")
