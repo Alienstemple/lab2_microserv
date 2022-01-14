@@ -1,4 +1,4 @@
-package com.borisovskaya.reservation.model;
+package com.borisovskaya.gateway.model;
 
 public class ReservationResponse {
     private String reservationUid;

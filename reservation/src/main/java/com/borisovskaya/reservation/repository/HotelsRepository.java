@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface HotelsRepository extends JpaRepository<Hotels, Integer> {
-    Hotels findByHotelUid(UUID hotelUid);
+    Hotels findByHotelUid(String hotelUid);
 }

@@ -1,29 +1,19 @@
-package com.borisovskaya.reservation.model;
+package com.borisovskaya.gateway.model;
 
-public class ReservationResponse {
+public class ReservationResponseWithHotel {
     private String reservationUid;
-    private String hotelUid;
+    private HotelShortResponse hotel;
     private String startDate;
     private String endDate;
     private Integer discount;
     private String status;
     private Payment payment;
 
-    public ReservationResponse(String reservationUid, String hotelUid, String startDate, String endDate, Integer discount, String status, Payment payment) {
-        this.reservationUid = reservationUid;
-        this.hotelUid = hotelUid;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.discount = discount;
-        this.status = status;
-        this.payment = payment;
-    }
-
     @Override
     public String toString() {
-        return "ReservationResponse{" +
+        return "ReservationResponseWithHotel{" +
                 "reservationUid='" + reservationUid + '\'' +
-                ", hotelUid='" + hotelUid + '\'' +
+                ", hotel=" + hotel +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", discount=" + discount +
@@ -36,8 +26,8 @@ public class ReservationResponse {
         this.reservationUid = reservationUid;
     }
 
-    public void setHotelUid(String hotelUid) {
-        this.hotelUid = hotelUid;
+    public void setHotel(HotelShortResponse hotel) {
+        this.hotel = hotel;
     }
 
     public void setStartDate(String startDate) {
@@ -64,8 +54,8 @@ public class ReservationResponse {
         return reservationUid;
     }
 
-    public String getHotelUid() {
-        return hotelUid;
+    public HotelShortResponse getHotel() {
+        return hotel;
     }
 
     public String getStartDate() {
@@ -86,5 +76,15 @@ public class ReservationResponse {
 
     public Payment getPayment() {
         return payment;
+    }
+
+    public ReservationResponseWithHotel(String reservationUid, HotelShortResponse hotel, String startDate, String endDate, Integer discount, String status, Payment payment) {
+        this.reservationUid = reservationUid;
+        this.hotel = hotel;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.discount = discount;
+        this.status = status;
+        this.payment = payment;
     }
 }

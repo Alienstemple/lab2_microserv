@@ -1,40 +1,29 @@
-package com.borisovskaya.reservation.model;
+package com.borisovskaya.gateway.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+
 import java.util.UUID;
 
-@Entity
-@Table(name = "hotels")
+
 public class Hotels {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+
     private Integer id;
 
-    @Column(name = "hotel_uid", nullable = false)
-    private String hotelUid;
+    private UUID hotelUid;
 
-    @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "country", nullable = false, length = 80)
     private String country;
 
-    @Column(name = "city", nullable = false, length = 80)
     private String city;
 
-    @Column(name = "address", nullable = false, length = 255)
     private String address;
 
-    @Column(name = "stars")
     private Integer stars;
 
-    @Column(name = "price", nullable = false)
     private Integer price;
 
-    public String getHotelUid() {
+    public UUID getHotelUid() {
         return hotelUid;
     }
 
@@ -100,8 +89,7 @@ public class Hotels {
                 '}';
     }
 
-    public Hotels(String hotelUid, String name, String country, String city, String address, Integer stars, Integer price) {
-        this.hotelUid = hotelUid;
+    public Hotels(String name, String country, String city, String address, Integer stars, Integer price) {
         this.name = name;
         this.country = country;
         this.city = city;

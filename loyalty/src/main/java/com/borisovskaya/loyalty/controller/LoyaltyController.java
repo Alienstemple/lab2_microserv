@@ -6,10 +6,7 @@ import com.borisovskaya.loyalty.service.LoyaltyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,8 +21,9 @@ public class LoyaltyController {
     }
 
     @GetMapping(value = "/loyalty", produces = "application/json")
-    public ResponseEntity<LoyaltyResponse> getLoyaltyByUsername(@RequestParam String username) {
-        return new ResponseEntity<LoyaltyResponse>(loyaltyService.getLoyalty(username), HttpStatus.OK);
+    public LoyaltyResponse getLoyaltyByUsername(@RequestHeader("X-User-Name") String xUserName) {
+        //Loyalty resp = loyaltyService.getLoyalty(username);
+        return loyaltyService.getLoyalty(xUserName);
     }
 
     @GetMapping(value = "/loyalty/incr", produces = "application/json")
